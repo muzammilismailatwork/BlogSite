@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Mail;
 class MyController extends Controller
 {
     public function home(){
-        return view("Frontend.index");
+        $show_posts = \App\Models\Posts::inRandomOrder()->paginate(5);
+        $category = \App\Models\Categories::orderby("id","desc")->paginate(5);
+        $latest_posts =\App\Models\Posts::orderby("id", "desc")->paginate(5);
+        return view("Frontend.index",["posts"=>$show_posts , "categories"=>$category , "latest"=>$latest_posts]);
+        
     }
     public function about(){
         return view("Frontend.about");
@@ -39,6 +43,10 @@ class MyController extends Controller
         $newUser = Subscription::create($data);
         Mail::to($newUser->email)->send(new subscriptionEmail($newUser));
         return redirect()->route("homepage")->with("success","Subscription Successfully");
+    }
+    public function read($id){
+        $posts = \App\Models\Posts::find($id);
+        return view("Frontend.continueread",["post"=>$posts]);
     }
 //    public function myregister(){
 //        return view("Layouts.register");

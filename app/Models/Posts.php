@@ -18,4 +18,9 @@ class Posts extends Model
     {
         return $this->hasOne(Categories::class,'id','post_cat');
     }
+    public function user_name(): hasOne
+    {
+        return $this->hasOne(User::class,"id","userid");
+    }
+   
 }

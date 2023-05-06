@@ -18,6 +18,7 @@
                 </a>
             </li>
             <li class="nav-item">
+            @can("view_category", App\Models\User::class)
                 <a class="nav-link " href="{{route("dashboard.categories")}}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-success text-sm opacity-10"></i>
@@ -25,6 +26,7 @@
                     <span class="nav-link-text ms-1">Categories</span>
                 </a>
             </li>
+            @endcan
             <li class="nav-item">
                 <a class="nav-link " href="{{route("dashboard.posts")}}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -33,6 +35,8 @@
                     <span class="nav-link-text ms-1">Posts</span>
                 </a>
             </li>
+            
+            @can('view_page',\App\Models\User::class)
                         <li class="nav-item">
                             <a class="nav-link " href="{{route("dashboard.contact")}}">
                                 <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -41,6 +45,8 @@
                                 <span class="nav-link-text ms-1">Contact</span>
                             </a>
                         </li>
+            @endcan
+           @can('view_subscription',\App\Models\User::class)
             <li class="nav-item">
                 <a class="nav-link " href="{{route("dashboard.subscribe")}}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -49,33 +55,8 @@
                     <span class="nav-link-text ms-1">Subscribe</span>
                 </a>
             </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="../pages/profile.html">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Profile</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="../pages/sign-in.html">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Sign In</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="../pages/sign-up.html">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-collection text-info text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Sign Up</span>
-                </a>
-            </li>
+            @endcan
+            
         </ul>
     </div>
     <div class="sidenav-footer mx-3 ">

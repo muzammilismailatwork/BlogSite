@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 class Categories extends Controller
 {
     public function cat(){
+        $this->autorize("view_category", App\Models\User::class);
         $category = \App\Models\Categories::orderby("id","desc")->paginate(5);
         return view("dashboard.categories", compact("category"));
     }
@@ -20,7 +21,7 @@ class Categories extends Controller
     public function store(Request $request){
         $x=$request->validate([
             "cat_name"=>"required",
-            "image"=>"required|mimes:png,jpg,jpeg",
+            "image"=>"required|mimes:png,jpg,jpeg|max:5000",
         ]);
         $fileName = time().".".$request->image->extension();
         $image=$request->image->move(public_path("uploads"), $fileName);

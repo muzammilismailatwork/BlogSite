@@ -9,7 +9,12 @@ use Illuminate\Support\Facades\File;
 class PostController extends Controller
 {
     public function posts(){
-        $show_posts = \App\Models\Posts::orderby("id", "desc")->paginate(5);
+        if(auth()->user()->admin){
+        $show_posts = \App\Models\Posts::orderby("userid", "desc")->paginate(5);
+        }
+        else{
+        $show_posts = \App\Models\Posts::where("userid", auth()->user()->id)->orderby("id", "desc")->paginate(5);
+        }
         return view("dashboard.posts",["posts"=>$show_posts]);
     }
     public function addposts(){
@@ -26,6 +31,7 @@ class PostController extends Controller
         $fileName = time().".".$request->post_image->extension();
         $image=$request->post_image->move(public_path("uploads"),$fileName);
         $x["post_image"]="/uploads/".$fileName;
+        $x["userid"]= auth()->user()->id;
         Posts::create($x);
         return redirect()->route("dashboard.posts")->with("success", "Your post is created!");
     }
